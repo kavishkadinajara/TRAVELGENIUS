@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import '../Style/scrollbar.css'
+import { BackgroundBeams } from "@/components/ui/background-beams";
+import { twMerge } from "tailwind-merge";
+import { TracingBeam } from "@/components/ui/tracing-beam";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +20,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className}`}>
+      <BackgroundBeams />
+      <TracingBeam className="">
+        <div className="relative z-10 w-full">
+          {children}
+        </div>
+      </TracingBeam>
+      </body>
     </html>
   );
 }
