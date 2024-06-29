@@ -1,4 +1,4 @@
-Number_of_Travelers,Budget,Area_of_Interest,Warm,Transportation_Mode,Recommendation
+Number_of_Travelers,Budget,Area_of_Interest,Preferred_Climate,Transportation_Mode,Recommendation
 6,35000,Beach,Warm,Bikes,"Marble Beach, Trincomalee"
 4,80000,Forest,Tropical,Public Transport,"Sinharaja Forest Reserve, Deniyaya"
 2,70000,City,Moderate,Van,"Kurunegala City, Kurunegala"
