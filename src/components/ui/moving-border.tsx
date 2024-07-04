@@ -33,7 +33,7 @@ export function Button({
   return (
     <Component
       className={cn(
-        "relative h-16 w-[420px] p-[1px] overflow-hidden text-0xl bg-transparent",
+        "relative h-12 md:h-16 w-full md:w-[420px] p-[1px] overflow-hidden text-0xl bg-transparent",
         containerClassName
       )}
       style={{ borderRadius }}
@@ -46,7 +46,7 @@ export function Button({
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
             className={cn(
-              "h-20 w-full opacity-[] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
+              "h-full w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
               borderClassName
             )}
           />

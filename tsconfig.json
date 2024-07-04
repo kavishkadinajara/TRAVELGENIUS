@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/lib/utils/motion.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/lib/utils/motion.js", "src/app/recommendation/layout.jsx", "src/app/recommendation/page.jsx"],
   "exclude": ["node_modules"]
 }
