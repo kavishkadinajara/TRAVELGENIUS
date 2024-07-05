@@ -1,6 +1,9 @@
 "use client";
 import { useState } from 'react';
 import React from 'react';
+import axios from 'axios';
+
+const googleApiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 
 export default function Recommendation() {
   const [numTravelers, setNumTravelers] = useState('');
@@ -9,21 +12,26 @@ export default function Recommendation() {
   const [preferredClimate, setPreferredClimate] = useState('');
   const [transportMode, setTransportMode] = useState('');
   const [recommendation, setRecommendation] = useState(null);
+  const [details, setDetails] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setApiError(null);
     try {
-      const response = await fetch('/api/recommend', {
+      const response = await fetch('http://127.0.0.1:8000/api/recommend', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          numTravelers,
-          budget,
-          areaOfInterest,
-          preferredClimate,
-          transportMode,
+          Number_of_Travelers: numTravelers,
+          Budget: budget,
+          Area_of_Interest: areaOfInterest,
+          Preferred_Climate: preferredClimate,
+          Transportation_Mode: transportMode,
         }),
       });
 
@@ -33,8 +41,34 @@ export default function Recommendation() {
 
       const result = await response.json();
       setRecommendation(result.recommendation);
+
+      // Fetch details from Google for the recommended place
+      const googleResponse = await fetchGoogleDetails(result.recommendation);
+      setDetails(googleResponse);
     } catch (error) {
       console.error('Error fetching recommendation:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchGoogleDetails = async (place) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/api/google-places`, {
+        params: { input: place }
+      });
+
+      if (response.data.status === "REQUEST_DENIED") {
+        throw new Error(response.data.error_message);
+      }
+
+      return {
+        google: response.data,
+      };
+    } catch (error) {
+      console.error('Error fetching Google details:', error);
+      setApiError(error.message);
+      return null;
     }
   };
 
@@ -131,10 +165,29 @@ export default function Recommendation() {
         </div>
       </form>
 
+      {loading && <div className="flex justify-center mt-4 text-white">Loading...</div>}
+
+      {apiError && <div className="flex justify-center mt-4 text-red-500">{apiError}</div>}
+
       {recommendation && (
-        <div className='mt-8 text-center'>
-          <h2 className='text-xl font-bold'>Recommended Place:</h2>
-          <p className='text-lg'>{recommendation}</p>
+        <div className="mt-8 p-8 rounded-xl shadow-md  text-white max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold mb-4 text-center">Recommended Place: {recommendation}</h2>
+          {details && details.google.candidates && details.google.candidates.length > 0 ? (
+            <div>
+              <p className='text-center mb-4'>Here are some details about <span className="text-blue-300 font-bold">{recommendation}</span>:</p>
+              <p className="mb-4"><strong>Name:</strong> {details.google.candidates[0].name}</p>
+              <p className="mb-4"><strong>Address:</strong> {details.google.candidates[0].formatted_address}</p>
+              {details.google.candidates[0].photos && details.google.candidates[0].photos.length > 0 && (
+                <img
+                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${details.google.candidates[0].photos[0].photo_reference}&key=${googleApiKey}`}
+                  alt={details.google.candidates[0].name}
+                  className="rounded-lg shadow-md w-full h-auto"
+                />
+              )}
+            </div>
+          ) : (
+            <div className='text-center'>No details available for the recommended place.</div>
+          )}
         </div>
       )}
     </section>
