@@ -74,7 +74,7 @@ export default function Recommendation() {
 
   return (
     <section className="py-12">
-      <div className='flex justify-center text-lg px-10 md:text-xl lg:text-2xl mb-8'>
+      <div className='flex justify-center text-lg px-12 md:text-xl lg:text-2xl mb-8'>
         <h1 className="font-bold text-gray-500 text-center">Select your options to find the best places...</h1>
       </div>
 
