@@ -259,7 +259,7 @@ const Recommendation = () => {
 
       {loading && <div className="flex justify-center mt-4 text-white">Loading...</div>}
 
-      {apiError && <div className="flex justify-center mt-4 text-red-500">{apiError}</div>}
+      {/* {apiError && <div className="flex justify-center mt-4 text-red-500">{apiError}</div>} */}
 
       {recommendation && (
         <div className="mt-8 p-8 rounded-xl shadow-md text-white max-w-4xl mx-auto">
