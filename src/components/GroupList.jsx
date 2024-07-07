@@ -27,8 +27,8 @@ const people = [
     id: 4,
     name: "Manula",
     designation: "",
-    image:
-      "",
+    image: "/manula.jpg"
+   
   },
   {
     id: 5,
@@ -41,7 +41,7 @@ const people = [
 
 export function GroupList() {
   return (
-    <div className="mt-20 md:mt-28">
+    <div className="-mt-6 md:mt-28">
         <div className="flex justify-center mb-16">
             <h1 className="text-center font-thin text-md">Our Team😉❤️</h1>
         </div>

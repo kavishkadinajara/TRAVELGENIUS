@@ -160,7 +160,7 @@ const Recommendation = () => {
           {/* District */}
           <div>
             <label htmlFor="district" className="block text-sm font-medium text-gray-700">
-              Your Origin:
+              Your Preferred District:
             </label>
             <select
               id="district"
