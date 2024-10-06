@@ -5,7 +5,7 @@ import { TracingBeam } from "@/components/ui/tracing-beam";
 import NavBar from "@/components/NavBar";
 import { Hero } from "@/components/Hero";
 import RecommendationForm from '@/components/RecommendationForm';
-import RecommendationResult from '@/components/RecommendationResult';
+import { GroupList } from '@/components/GroupList';
 import{ GlobeDemo } from '@/components/GlobeDemo'
 
 export default function Home() {
@@ -25,6 +25,7 @@ export default function Home() {
           <GlobeDemo/>
           {/* <RecommendationForm onRecommend={handleRecommendation} />
           {recommendation && <RecommendationResult recommendation={recommendation} />} */}
+          <GroupList/>
         </div>
       </main>
     </>

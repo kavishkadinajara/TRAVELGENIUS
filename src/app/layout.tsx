@@ -5,6 +5,7 @@ import '../Style/scrollbar.css'
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { twMerge } from "tailwind-merge";
 import { TracingBeam } from "@/components/ui/tracing-beam";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           {children}
         </div>
       </TracingBeam>
+      <Footer/>
       </body>
     </html>
   );

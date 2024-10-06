@@ -2,6 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { Button } from "@/components/ui/moving-border";
 
 const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World), {
   ssr: false,
@@ -395,7 +397,8 @@ export function GlobeDemo() {
   ];
 
   return (
-    <div className="flex flex-row items-center justify-center py-20 h-screen md:h-auto dark:bg-black  relative w-full min-h-screen">
+    <>
+      <div className="flex flex-row items-center justify-center py-20 h-screen md:h-auto dark:bg-black  relative w-full ">
       <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
         <motion.div
           initial={{
@@ -414,16 +417,20 @@ export function GlobeDemo() {
           <h2 className="text-center text-xl md:text-4xl font-boldtext-white">
             We sell soap worldwide
           </h2>
-          <p className="text-center text-base md:text-lg font-normal text-neutral-600  max-w-md mt-2 mx-auto">
-            This globe is interactive and customizable. Have fun with it, and
-            don&apos;t forget to share it. :)
-          </p>
         </motion.div>
-        <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-black z-40" />
+        <div className="absolute w-full bottom-0 inset-x-0 h-10 md:h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-black z-40" />
         <div className="absolute w-full md:-bottom-20 bottom-12 h-72 md:h-full z-10">
-          <World data={sampleArcs} globeConfig={globeConfig} />;
+          <World data={sampleArcs} globeConfig={globeConfig} />
         </div>
       </div>
     </div>
+    {/* <div className="flex justify-center space-x-4 mt-6 w-full px-4 md:w-auto">
+    <Link href="/recommendation">
+      <Button className='text-xl md:text-2xl font-thin px-5'>
+        Find Your Spot
+      </Button>
+    </Link>
+  </div> */}
+    </>
   );
 }
